@@ -1,6 +1,6 @@
-package com.epsih.security.repository;
+package com.epsih.repository;
 
-import com.epsih.security.model.Authority;
+import com.epsih.model.Authority;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

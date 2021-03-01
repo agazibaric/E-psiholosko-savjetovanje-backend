@@ -1,6 +1,6 @@
-package com.epsih.security.rest;
+package com.epsih.rest;
 
-import com.epsih.security.rest.dto.LoginDto;
+import com.epsih.dto.LoginDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -63,7 +63,7 @@ public class AuthenticationRestController {
          this.idToken = idToken;
       }
 
-      @JsonProperty("id_token")
+      @JsonProperty("token")
       String getIdToken() {
          return idToken;
       }

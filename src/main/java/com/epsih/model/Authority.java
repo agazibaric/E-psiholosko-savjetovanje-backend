@@ -1,4 +1,4 @@
-package com.epsih.security.model;
+package com.epsih.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

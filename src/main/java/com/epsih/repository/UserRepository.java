@@ -1,6 +1,6 @@
-package com.epsih.security.repository;
+package com.epsih.repository;
 
-import com.epsih.security.model.User;
+import com.epsih.model.User;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
