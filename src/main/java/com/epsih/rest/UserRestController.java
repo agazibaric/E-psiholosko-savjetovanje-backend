@@ -1,11 +1,11 @@
-package com.epsih.security.rest;
+package com.epsih.rest;
 
-import com.epsih.security.model.User;
+import com.epsih.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.epsih.security.service.UserService;
+import com.epsih.service.UserService;
 
 @RestController
 @RequestMapping("/api")

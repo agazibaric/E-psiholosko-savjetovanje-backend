@@ -1,7 +1,7 @@
 package com.epsih.security;
 
-import com.epsih.security.model.User;
-import com.epsih.security.repository.UserRepository;
+import com.epsih.model.User;
+import com.epsih.repository.UserRepository;
 import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

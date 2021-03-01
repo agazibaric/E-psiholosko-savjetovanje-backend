@@ -1,4 +1,4 @@
-package com.epsih.security.rest.dto;
+package com.epsih.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

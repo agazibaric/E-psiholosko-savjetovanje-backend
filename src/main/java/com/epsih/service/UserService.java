@@ -1,8 +1,8 @@
-package com.epsih.security.service;
+package com.epsih.service;
 
 import com.epsih.security.SecurityUtils;
-import com.epsih.security.model.User;
-import com.epsih.security.repository.UserRepository;
+import com.epsih.model.User;
+import com.epsih.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
