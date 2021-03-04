@@ -1,5 +1,6 @@
 package com.epsih.config;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -86,7 +87,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .and()
          .authorizeRequests()
          .antMatchers("/api/authenticate").permitAll()
-         // .antMatchers("/api/register").permitAll()
+         .antMatchers("/api/register").permitAll()
+         .antMatchers("/api/activate/*").permitAll()
          // .antMatchers("/api/activate").permitAll()
          // .antMatchers("/api/account/reset-password/init").permitAll()
          // .antMatchers("/api/account/reset-password/finish").permitAll()
@@ -102,5 +104,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
    private JWTConfigurer securityConfigurerAdapter() {
       return new JWTConfigurer(tokenProvider);
+   }
+
+   @Bean
+   public ModelMapper modelMapper() {
+      return new ModelMapper();
    }
 }

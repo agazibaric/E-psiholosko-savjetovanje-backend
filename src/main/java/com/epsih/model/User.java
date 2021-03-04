@@ -17,8 +17,7 @@ public class User {
    @JsonIgnore
    @Id
    @Column(name = "ID")
-   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")
-   @SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQ", allocationSize = 1)
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
    @Column(name = "USERNAME", length = 50, unique = true)
@@ -46,6 +45,11 @@ public class User {
    @NotNull
    @Size(min = 4, max = 50)
    private String email;
+
+   // TODO: make phone number validator annotation
+   @Column(name = "PHONENUMBER", length = 20)
+   @NotNull
+   private String phoneNumber;
 
    @JsonIgnore
    @Column(name = "ACTIVATED")
@@ -122,6 +126,14 @@ public class User {
 
    public void setAuthorities(Set<Authority> authorities) {
       this.authorities = authorities;
+   }
+
+   public String getPhoneNumber() {
+      return phoneNumber;
+   }
+
+   public void setPhoneNumber(String phoneNumber) {
+      this.phoneNumber = phoneNumber;
    }
 
    @Override
