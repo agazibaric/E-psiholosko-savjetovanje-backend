@@ -43,6 +43,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       return new BCryptPasswordEncoder();
    }
 
+//	protected void configure(HttpSecurity http) throws Exception{
+//		System.out.println("Security");
+//		http.authorizeRequests().antMatchers("/").permitAll();
+//	}	
+   
    @Override
    public void configure(WebSecurity web) {
       web.ignoring()
