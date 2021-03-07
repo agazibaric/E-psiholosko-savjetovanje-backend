@@ -1,5 +1,6 @@
 package com.epsih.service;
 
+import com.epsih.exceptions.NotFoundException;
 import com.epsih.security.SecurityUtils;
 import com.epsih.model.User;
 import com.epsih.repository.UserRepository;
@@ -19,6 +20,11 @@ public class UserService {
    @Transactional(readOnly = true)
    public Optional<User> getUserWithAuthorities() {
       return SecurityUtils.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername);
+   }
+
+   @Transactional(readOnly = true)
+   public User getById(Long id) {
+      return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
    }
 
 }
