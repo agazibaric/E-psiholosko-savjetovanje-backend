@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.epsih.model.BusinessType;
 import com.epsih.model.Termin;
 import com.epsih.service.TerminService;
 
@@ -50,6 +49,7 @@ public class TerminController {
 	
 	@PutMapping("/{id}")
 	public void updateTermin(@RequestBody Termin termin, @PathVariable Long id) {
+		termin.setId(id);
 		service.addTermin(termin);
 	}
 	
