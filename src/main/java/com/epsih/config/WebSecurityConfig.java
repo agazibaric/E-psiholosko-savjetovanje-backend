@@ -90,7 +90,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .antMatchers("/api/authenticate").permitAll()
          .antMatchers("/api/register").permitAll()
          .antMatchers("/api/activate/*").permitAll()
-         // .antMatchers("/api/activate").permitAll()
          // .antMatchers("/api/account/reset-password/init").permitAll()
          // .antMatchers("/api/account/reset-password/finish").permitAll()
 
@@ -98,6 +97,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .antMatchers(HttpMethod.POST, "/api/business").hasAuthority(AuthorityConstants.ROLE_ADMIN)
          .antMatchers(HttpMethod.PUT, "/api/business").hasAuthority(AuthorityConstants.ROLE_ADMIN)
          .antMatchers(HttpMethod.DELETE, "/api/business").hasAuthority(AuthorityConstants.ROLE_ADMIN)
+         .antMatchers(HttpMethod.GET, "/api/business").permitAll()
+
+         .antMatchers(HttpMethod.POST, "/api/termin").hasAuthority(AuthorityConstants.ROLE_SPECIAL_USER)
+         .antMatchers(HttpMethod.DELETE, "/api/termin").hasAuthority(AuthorityConstants.ROLE_SPECIAL_USER)
+         .antMatchers(HttpMethod.PUT, "/api/termin").hasAuthority(AuthorityConstants.ROLE_SPECIAL_USER)
+         .antMatchers(HttpMethod.GET, "/api/termin").hasAuthority(AuthorityConstants.ROLE_USER)
 
          .anyRequest().authenticated()
 
