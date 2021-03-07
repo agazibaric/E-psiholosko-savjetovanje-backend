@@ -104,6 +104,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .antMatchers(HttpMethod.PUT, "/api/termin").hasAuthority(AuthorityConstants.ROLE_SPECIAL_USER)
          .antMatchers(HttpMethod.GET, "/api/termin").hasAuthority(AuthorityConstants.ROLE_USER)
 
+
          .anyRequest().authenticated()
 
          .and()

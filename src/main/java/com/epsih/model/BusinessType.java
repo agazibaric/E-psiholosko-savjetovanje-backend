@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,23 +14,24 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"type", "name"}))
+@Table(name = "BUSINESSTYPE", uniqueConstraints = @UniqueConstraint(columnNames = {"type", "name"}))
+@Builder
 public class BusinessType {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Long id;
 
    @Column
    @NotNull
    private String type;
 
-	@Column
+   @Column
    @NotNull
-	private String name;
+   private String name;
 
-	@Column
-	@NotNull
-	private String description;
+   @Column
+   @NotNull
+   private String description;
 
 }

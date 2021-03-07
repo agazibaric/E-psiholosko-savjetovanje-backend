@@ -12,47 +12,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.epsih.model.BusinessType;
-import com.epsih.model.Termin;
-import com.epsih.service.TerminService;
+import com.epsih.dto.ReviewDto;
+import com.epsih.model.Review;
+import com.epsih.service.ReviewService;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.validation.Valid;
-
 @RestController
-@RequestMapping("/api/termin")
+@RequestMapping("/api/review")
 @AllArgsConstructor
 @Data
-public class TerminController {
+public class ReviewController {
 
 	@Autowired
-	private final TerminService service;
+	private final ReviewService reviewService;
 
 	@GetMapping("/{id}")
-	public Termin getTermin(@PathVariable Long id) {
-		return service.terminById(id);
+	public Review getReview(@PathVariable Long id) {
+		return reviewService.reviewById(id);
 	}
 
 	@GetMapping
-	public List<Termin> getAllTermins() {
-		return service.allTermins();
+	public List<Review> getAllReviews() {
+		return reviewService.allReviews();
 	}
 
 	@PostMapping
-	public void newTermin(@Valid @RequestBody Termin termin) {
-	   service.addTermin(termin);
+	public void newReview(@RequestBody ReviewDto dto) {
+      reviewService.addReview(dto);
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteTermin(@PathVariable Long id) {
-		service.deleteTermin(id);
+	public void deleteReview(@PathVariable Long id) {
+      reviewService.deleteReview(id);
 	}
 
 	@PutMapping("/{id}")
-	public void updateTermin(@RequestBody Termin termin, @PathVariable Long id) {
-		service.updateById(id, termin);
+	public void updateReview(@RequestBody ReviewDto dto, @PathVariable Long id) {
+      reviewService.updateById(id, dto);
 	}
+
+   @GetMapping("/myReviews")
+	public List<Review> getMyReviews() {
+	   return reviewService.getMyReviews();
+   }
 
 }

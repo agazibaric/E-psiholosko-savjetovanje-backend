@@ -45,7 +45,7 @@ public class AuthService {
       Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
       SecurityContextHolder.getContext().setAuthentication(authentication);
 
-      boolean rememberMe = (loginDto.isRememberMe() == null) ? false : loginDto.isRememberMe();
+      boolean rememberMe = (loginDto.getRememberMe() == null) ? false : loginDto.getRememberMe();
       return tokenProvider.createToken(authentication, rememberMe);
    }
 
