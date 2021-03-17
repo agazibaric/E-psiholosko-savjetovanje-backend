@@ -39,4 +39,6 @@ public class Review {
 	@Min(1)
 	@Max(5)
 	private Integer grade;
+	
+	private String description;
 }

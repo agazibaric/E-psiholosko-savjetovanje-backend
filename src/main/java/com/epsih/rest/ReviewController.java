@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.epsih.dto.ReviewDto;
 import com.epsih.model.Review;
-import com.epsih.model.User;
 import com.epsih.service.ReviewService;
-import com.epsih.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,34 +26,36 @@ import lombok.Data;
 public class ReviewController {
 
 	@Autowired
-	private final ReviewService service;
-	
-	
-	
+	private final ReviewService reviewService;
+
 	@GetMapping("/{id}")
 	public Review getReview(@PathVariable Long id) {
-		return service.reviewById(id);
+		return reviewService.reviewById(id);
 	}
-	
+
 	@GetMapping
 	public List<Review> getAllReviews() {
-		return service.allReviews();
+		return reviewService.allReviews();
 	}
-	
+
 	@PostMapping
 	public void newReview(@RequestBody ReviewDto dto) {
-		service.addReview(dto);
+      reviewService.addReview(dto);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public void deleteReview(@PathVariable Long id) {
-		service.deleteReview(id);
+      reviewService.deleteReview(id);
 	}
-	
-//	@PutMapping("/{id}")
-//	public void updateReview(@RequestBody ReviewDto dto, @PathVariable Long id) {
-//		review.setId(id);
-//		service.addReview(review);
-//	}
-	
+
+	@PutMapping("/{id}")
+	public void updateReview(@RequestBody ReviewDto dto, @PathVariable Long id) {
+      reviewService.updateById(id, dto);
+	}
+
+   @GetMapping("/myReviews")
+	public List<Review> getMyReviews() {
+	   return reviewService.getMyReviews();
+   }
+
 }

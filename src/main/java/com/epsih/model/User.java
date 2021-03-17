@@ -37,8 +37,7 @@ public class User {
    @JsonIgnore
    @Id
    @Column(name = "ID")
-   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")
-   @SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQ", allocationSize = 1)
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
    @Column(name = "USERNAME", length = 50, unique = true)
@@ -68,21 +67,15 @@ public class User {
    @Email
    private String email;
 
+   // TODO: make phone number validator annotation
+   @Column(name = "PHONENUMBER", length = 20)
+   @NotNull
+   private String phoneNumber;
+   
    @JsonIgnore
    @Column(name = "ACTIVATED")
    @NotNull
    private boolean activated;
-   
-   @Column(name = "JOB")
-   @NotNull
-   private String job;
-   
-   @Column(name = "DESCRIPTION")
-   private String description;
-   
-   @OneToMany
-   @JsonIgnore
-   private List<Review> reviews; 
 
    @ManyToMany
    @JoinTable(
