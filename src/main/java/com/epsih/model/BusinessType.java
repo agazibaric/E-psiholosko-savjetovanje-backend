@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "business_type", uniqueConstraints = @UniqueConstraint(columnNames = {"type", "name"}))
+@Table(name = "business_type", uniqueConstraints = @UniqueConstraint(columnNames = {"type", "category"}))
 @Builder
 public class BusinessType {
 
@@ -41,9 +41,6 @@ public class BusinessType {
    @Enumerated(EnumType.STRING)
    private BusinessCategory category;
    
-   @NotNull
-   private String name;
-
    @NotNull
    private String description;
    
