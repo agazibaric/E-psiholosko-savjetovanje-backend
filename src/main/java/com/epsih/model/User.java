@@ -1,7 +1,6 @@
 package com.epsih.model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -9,11 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -28,60 +27,60 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "user")
 @Data 
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class User {
 	
    @JsonIgnore
    @Id
-   @Column(name = "ID")
+   @Column(name = "pk_user")
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
-   @Column(name = "USERNAME", length = 50, unique = true)
+   @Column(length = 50, unique = true)
    @NotNull
    @Size(min = 4, max = 50)
    private String username;
 
    @JsonIgnore
-   @Column(name = "PASSWORD", length = 100)
+   @Column(length = 100)
    @NotNull
    @Size(min = 4, max = 100)
    private String password;
 
-   @Column(name = "FIRSTNAME", length = 50)
+   @Column(length = 50)
    @NotNull
    @Size(min = 4, max = 50)
    private String firstname;
 
-   @Column(name = "LASTNAME", length = 50)
+   @Column(length = 50)
    @NotNull
    @Size(min = 4, max = 50)
    private String lastname;
 
-   @Column(name = "EMAIL", length = 50)
+   @Column(length = 50)
    @NotNull
    @Size(min = 4, max = 50)
    @Email
    private String email;
 
    // TODO: make phone number validator annotation
-   @Column(name = "PHONENUMBER", length = 20)
+   @Column(name = "phonenumber", length = 20)
    @NotNull
    private String phoneNumber;
    
    @JsonIgnore
-   @Column(name = "ACTIVATED")
    @NotNull
    private boolean activated;
 
    @ManyToMany
    @JoinTable(
       name = "USER_AUTHORITY",
-      joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
-      inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_NAME", referencedColumnName = "NAME")})
+      joinColumns = @JoinColumn(name = "pk_user"),
+      inverseJoinColumns = @JoinColumn(name = "name"))
    @BatchSize(size = 20)
    private Set<Authority> authorities = new HashSet<>();
 

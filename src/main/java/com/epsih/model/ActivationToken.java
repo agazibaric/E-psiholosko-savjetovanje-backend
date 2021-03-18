@@ -22,9 +22,12 @@ public class ActivationToken {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+    
     @Column
     private String token;
+    
     @OneToOne(fetch = LAZY)
     private User user;
+    
     private Instant expiryDate;
 }
