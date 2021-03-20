@@ -17,7 +17,6 @@ public class TerminService {
 
 	private final TerminRepository repository;
 
-
 	public boolean contains(Long id) {
 		return repository.findById(id).isPresent();
 	}

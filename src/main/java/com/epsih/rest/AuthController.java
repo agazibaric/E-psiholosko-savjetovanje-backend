@@ -1,25 +1,26 @@
 package com.epsih.rest;
 
-import com.epsih.dto.LoginDto;
-import com.epsih.dto.RegisterDto;
-import com.epsih.security.jwt.JWTToken;
-import com.epsih.service.AuthService;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
-import com.epsih.security.jwt.JWTFilter;
-import com.epsih.security.jwt.TokenProvider;
+import static org.springframework.http.HttpStatus.OK;
 
 import javax.validation.Valid;
 
-import static org.springframework.http.HttpStatus.OK;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.epsih.dto.LoginDto;
+import com.epsih.dto.RegisterDto;
+import com.epsih.security.jwt.JWTFilter;
+import com.epsih.security.jwt.JWTToken;
+import com.epsih.service.AuthService;
+
+import lombok.AllArgsConstructor;
 
 /**
  * Controller to authenticate users.

@@ -2,7 +2,8 @@ package com.epsih.rest;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,32 +13,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.epsih.model.BusinessType;
-import com.epsih.service.BusinessTypeService;
+import com.epsih.model.BusinessService;
+import com.epsih.service.BusinessServiceService;
 
 import lombok.AllArgsConstructor;
-
-import javax.validation.Valid;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/business")
-public class BusinessTypeContoller {
+public class ServiceContoller {
 
-	private final BusinessTypeService service;
+	private final BusinessServiceService service;
 
 	@GetMapping("/{id}")
-	public BusinessType getBusinessTypes(@PathVariable Long id) {
+	public BusinessService getBusinessTypes(@PathVariable Long id) {
 		return service.businessTypeById(id);
 	}
 
 	@GetMapping
-	public List<BusinessType> getAllBusinessTypes() {
+	public List<BusinessService> getAllBusinessTypes() {
 		return service.allBusinessTypes();
 	}
 
 	@PostMapping
-	public void postNewBusinessType(@Valid @RequestBody BusinessType newType) {
+	public void postNewBusinessType(@Valid @RequestBody BusinessService newType) {
 	   service.addNewBusinessType(newType);
 	}
 
@@ -47,7 +46,7 @@ public class BusinessTypeContoller {
 	}
 
 	@PutMapping("/{id}")
-	public void updateBusinessType(@PathVariable Long id, @RequestBody BusinessType newType) {
+	public void updateBusinessType(@PathVariable Long id, @RequestBody BusinessService newType) {
 		service.updateById(id, newType);
 	}
 

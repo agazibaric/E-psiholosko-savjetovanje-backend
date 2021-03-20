@@ -2,12 +2,13 @@ package com.epsih.service;
 
 import java.util.List;
 
-import com.epsih.dto.ReviewDto;
 import org.springframework.stereotype.Service;
 
+import com.epsih.dto.ReviewDto;
 import com.epsih.exceptions.NotFoundException;
+import com.epsih.model.Doctor;
+import com.epsih.model.Patient;
 import com.epsih.model.Review;
-import com.epsih.model.User;
 import com.epsih.repository.ReviewRepository;
 
 import lombok.AllArgsConstructor;
@@ -33,25 +34,26 @@ public class ReviewService {
    }
 
    public void addReview(ReviewDto dto) {
-      User currentUser = userService.getUserWithAuthorities().get();
-      User target = userService.getById(dto.getTargetId());
+      Patient currentUser = (Patient) userService.getUserWithAuthorities().get();
+      Doctor target = (Doctor) userService.getById(dto.getTargetId());
       // TODO: check that target is has ROLE_SPECIAL_USER
+      
       Review review = Review.builder()
          .grade(dto.getGrade())
-         .target(target)
+         .doctor(target)
+         .patient(currentUser)
          .description(dto.getDescription())
-         .reviewer(currentUser)
          .build();
       reviewRepository.save(review);
    }
 
    public void updateById(Long id, ReviewDto dto) {
-      Review review = reviewRepository.findById(id).orElseThrow(() -> new NotFoundException("Review with given ID not found"));
-      User target = userService.getById(dto.getTargetId());
-      // TODO: allow to update the target user ?
-      review.setTarget(target);
-      review.setGrade(dto.getGrade());
-      review.setDescription(dto.getDescription());
+//      Review review = reviewRepository.findById(id).orElseThrow(() -> new NotFoundException("Review with given ID not found"));
+//      User target = userService.getById(dto.getTargetId());
+//      // TODO: allow to update the target user ?
+//      review.setTarget(target);
+//      review.setGrade(dto.getGrade());
+//      review.setDescription(dto.getDescription());
    }
 
    public void deleteReview(Long id) {
@@ -59,7 +61,8 @@ public class ReviewService {
    }
 
    public List<Review> getMyReviews() {
-      User currentUser = userService.getUserWithAuthorities().get();
-      return reviewRepository.findByReviewer(currentUser);
+      Patient currentUser = (Patient) userService.getUserWithAuthorities().get();
+      return null;
+      //return reviewRepository.findByReviewer(currentUser);
    }
 }
