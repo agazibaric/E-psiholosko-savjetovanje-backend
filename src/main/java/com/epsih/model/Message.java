@@ -2,6 +2,7 @@ package com.epsih.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,24 +18,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "termin")
+@Table(name = "message")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class Termin {
+public class Message {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "pk_message")
 	private Long id;
-
+	
 	@NotNull
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime terminStart;
-
+	private LocalDateTime time;
+	
 	@NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime terminEnd;
-
-	private String description;
+	private String message;
+	
 }
