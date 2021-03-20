@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.epsih.model.BusinessService;
 import com.epsih.model.Termin;
 import com.epsih.service.TerminService;
 
