@@ -1,7 +1,14 @@
 package com.epsih.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,4 +25,7 @@ public class Patient extends User{
 	
    private String diagnosis;
 
+   @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient", cascade = CascadeType.ALL)
+   @JsonIgnore
+   private Set<Meeting> meetings;
 }

@@ -14,7 +14,7 @@ public class ExceptionController {
    @ExceptionHandler(value = Exception.class)
    public ResponseEntity<?> handleException(Exception e) {
       if (e instanceof DataIntegrityViolationException) {
-         DataIntegrityViolationException ex = (DataIntegrityViolationException) e;
+         //DataIntegrityViolationException ex = (DataIntegrityViolationException) e;
          return new ResponseEntity<String>("SQL constraint error", HttpStatus.BAD_REQUEST);
       }
       return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);

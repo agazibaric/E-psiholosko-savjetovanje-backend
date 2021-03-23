@@ -13,8 +13,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -32,9 +34,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User {
+public class User {
 	
-   @JsonIgnore
    @Id
    @Column(name = "pk_user")
    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,10 +71,11 @@ public abstract class User {
    // TODO: make phone number validator annotation
    @Column(name = "phonenumber", length = 20)
    @NotNull
+   @NotBlank(message = "Please enter your phone number")
    private String phoneNumber;
    
    @JsonIgnore
-   @NotNull
+   @Column(columnDefinition = "boolean default false")
    private boolean activated;
 
    @ManyToMany
@@ -84,4 +86,6 @@ public abstract class User {
    @BatchSize(size = 20)
    private Set<Authority> authorities = new HashSet<>();
 
+   
+   
 }

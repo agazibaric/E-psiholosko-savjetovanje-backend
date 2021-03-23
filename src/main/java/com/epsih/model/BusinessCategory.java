@@ -1,16 +1,21 @@
 package com.epsih.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,8 +25,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "business_category")
+@Entity				
+@Table(name = "business_category", uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 @Builder
 public class BusinessCategory {
 	
@@ -36,8 +41,10 @@ public class BusinessCategory {
    @NotNull
    private String decription;
    
-   @OneToMany(mappedBy = "category")
-   private List<BusinessService> services;
+   @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @JsonManagedReference
+   @Builder.Default
+   private List<BusinessService> services = new ArrayList<>();
    
    
 }
