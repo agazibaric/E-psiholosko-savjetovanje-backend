@@ -1,9 +1,13 @@
 package com.epsih.service;
 
+import com.epsih.exceptions.BadRequestException;
 import com.epsih.exceptions.NotFoundException;
 import com.epsih.exceptions.ServerErrorException;
+import com.epsih.exceptions.UnauthorizedException;
 import com.epsih.model.Meeting;
 import com.epsih.model.Patient;
+import com.epsih.model.Termin;
+import com.epsih.repository.MeetingRepository;
 import com.epsih.repository.PatientRepository;
 import com.epsih.security.SecurityUtils;
 import lombok.AllArgsConstructor;
@@ -16,6 +20,7 @@ import java.util.List;
 public class PatientService {
 
    private final PatientRepository patientRepository;
+   private final MeetingRepository meetingRepository;
 
    public Patient getCurrentPatient() {
       return SecurityUtils.getCurrentUsername()
@@ -31,6 +36,14 @@ public class PatientService {
       return getMyMeetings().stream()
          .filter(m -> m.getId().equals(id))
          .findAny().orElseThrow(() -> new NotFoundException("Meeting does not exist"));
+   }
+
+   public List<Termin> getMeetingTermins(Long meetingId) {
+      Meeting meeting = meetingRepository.findById(meetingId)
+         .orElseThrow(() -> new NotFoundException("Meeting does not exist"));
+      if (!meeting.getPatient().getId().equals(getCurrentPatient().getId()))
+         throw new UnauthorizedException("Unauthorized to access the resource");
+      return meeting.getTermins();
    }
 
 }

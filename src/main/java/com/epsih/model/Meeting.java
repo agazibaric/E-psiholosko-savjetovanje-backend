@@ -39,7 +39,7 @@ public class Meeting {
    @OneToMany(fetch = FetchType.EAGER, mappedBy = "meeting", cascade = CascadeType.ALL)
    @NotNull
    @JsonIgnoreProperties("meeting")
-   private List<Termin> termin;
+   private List<Termin> termins;
 
    @OneToOne
    @NotNull
