@@ -62,13 +62,6 @@ public class TokenProvider implements InitializingBean {
          validity = new Date(now + this.tokenValidityInMilliseconds);
       }
 
-      System.out.println("#########################################################");
-      System.out.println("#########################################################");
-      authentication.getAuthorities().forEach(System.out::println);
-      System.out.println("#########################################################");
-      System.out.println("#########################################################");
-
-
       return Jwts.builder()
          .setSubject(authentication.getName())
          .claim(AUTHORITIES_KEY, authorities)
