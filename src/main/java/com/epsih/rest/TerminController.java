@@ -50,8 +50,8 @@ public class TerminController {
 	}
 
 	@PutMapping("/{id}")
-	public void updateTermin(@RequestBody Termin termin, @PathVariable Long id) {
-		service.updateById(id, termin);
+	public void updateTermin(@Valid @RequestBody TerminDto terminDto, @PathVariable Long id) {
+		service.updateById(id, terminDto);
 	}
 
 }

@@ -19,19 +19,19 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class TerminService {
 
-   private final TerminRepository repository;
+   private final TerminRepository terminRepository;
    private final MeetingRepository meetingRepository;
 
    public boolean contains(Long id) {
-      return repository.findById(id).isPresent();
+      return terminRepository.findById(id).isPresent();
    }
 
    public List<Termin> allTermins() {
-      return repository.findAll();
+      return terminRepository.findAll();
    }
 
    public Termin terminById(Long id) {
-      return repository.findById(id).orElseThrow(() -> new NotFoundException("Termin with give id not found"));
+      return terminRepository.findById(id).orElseThrow(() -> new NotFoundException("Termin with give id not found"));
    }
 
    public void addTermin(TerminDto terminDto) {
@@ -47,19 +47,24 @@ public class TerminService {
          .meeting(meetingRepository.findById(terminDto.getMeetingId())
          .orElseThrow(() -> new NotFoundException("Meeting does no exist")))
          .build();
-      repository.save(termin);
+      terminRepository.save(termin);
    }
 
    public void deleteTermin(Long id) {
-      repository.deleteById(id);
+      terminRepository.deleteById(id);
    }
 
-   public void updateById(Long id, Termin termin) {
-      if (repository.existsById(id)) {
-         termin.setId(id);
-         repository.save(termin);
-      }
-      throw new NotFoundException("Could not update termin with non-existent id");
+   public void updateById(Long id, TerminDto terminDto) {
+      if (terminDto.getTerminEnd().isBefore(terminDto.getTerminStart()))
+         throw new BadRequestException("Scheduled termin time is not valid");
+
+      Termin termin = terminRepository.findById(id)
+         .orElseThrow(() -> new NotFoundException("Termin does not exist"));
+
+      termin.setTerminStart(terminDto.getTerminStart());
+      termin.setTerminEnd(terminDto.getTerminEnd());
+      termin.setDescription(terminDto.getDescription());
+      // Meeting update is not allowed
    }
 
 }
