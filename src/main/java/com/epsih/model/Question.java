@@ -1,7 +1,5 @@
 package com.epsih.model;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,31 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "message")
+@Table(name = "question")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class Message {
+public class Question {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "pk_message")
+   @Column(name = "pk_question")
    private Long id;
 
    @NotNull
-   @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-   private LocalDateTime time;
+   private String question;
 
-   @NotNull
-   private String message;
 
 }

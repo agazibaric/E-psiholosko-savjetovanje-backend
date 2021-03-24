@@ -2,6 +2,10 @@ package com.epsih.service;
 
 import java.util.List;
 
+import com.epsih.exceptions.ServerErrorException;
+import com.epsih.repository.DoctorRepository;
+import com.epsih.repository.PatientRepository;
+import com.epsih.security.SecurityUtils;
 import org.springframework.stereotype.Service;
 
 import com.epsih.dto.ReviewDto;
@@ -18,8 +22,8 @@ import lombok.AllArgsConstructor;
 public class ReviewService {
 
    private final ReviewRepository reviewRepository;
-
-   private final UserService userService;
+   private final DoctorRepository doctorRepository;
+   private final PatientRepository patientRepository;
 
    public boolean contains(Long id) {
       return reviewRepository.findById(id).isPresent();
@@ -34,13 +38,15 @@ public class ReviewService {
    }
 
    public void addReview(ReviewDto dto) {
-      Patient currentUser = (Patient) userService.getUserWithAuthorities().get();
-      Doctor target = (Doctor) userService.getById(dto.getTargetId());
-      // TODO: check that target is has ROLE_SPECIAL_USER
-      
+      Patient currentUser = SecurityUtils.getCurrentUsername()
+         .flatMap(patientRepository::findOneByUser_Username)
+         .orElseThrow(() -> new ServerErrorException("Something went wrong when adding review!"));
+      Doctor doctor = doctorRepository.findById(dto.getTargetId())
+         .orElseThrow(() -> new NotFoundException("Doctor does not exist"));
+
       Review review = Review.builder()
          .grade(dto.getGrade())
-         .doctor(target)
+         .doctor(doctor)
          .patient(currentUser)
          .description(dto.getDescription())
          .build();
@@ -48,12 +54,7 @@ public class ReviewService {
    }
 
    public void updateById(Long id, ReviewDto dto) {
-//      Review review = reviewRepository.findById(id).orElseThrow(() -> new NotFoundException("Review with given ID not found"));
-//      User target = userService.getById(dto.getTargetId());
-//      // TODO: allow to update the target user ?
-//      review.setTarget(target);
-//      review.setGrade(dto.getGrade());
-//      review.setDescription(dto.getDescription());
+
    }
 
    public void deleteReview(Long id) {
@@ -61,8 +62,6 @@ public class ReviewService {
    }
 
    public List<Review> getMyReviews() {
-      Patient currentUser = (Patient) userService.getUserWithAuthorities().get();
       return null;
-      //return reviewRepository.findByReviewer(currentUser);
    }
 }

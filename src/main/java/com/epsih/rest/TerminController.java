@@ -2,6 +2,9 @@ package com.epsih.rest;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
+import com.epsih.dto.TerminDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +21,12 @@ import com.epsih.service.TerminService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.validation.Valid;
-
 @RestController
 @RequestMapping("/api/termin")
 @AllArgsConstructor
 @Data
 public class TerminController {
 
-	@Autowired
 	private final TerminService service;
 
 	@GetMapping("/{id}")
@@ -40,8 +40,8 @@ public class TerminController {
 	}
 
 	@PostMapping
-	public void newTermin(@Valid @RequestBody Termin termin) {
-	   service.addTermin(termin);
+	public void newTermin(@Valid @RequestBody TerminDto terminDto) {
+	   service.addTermin(terminDto);
 	}
 
 	@DeleteMapping("/{id}")
