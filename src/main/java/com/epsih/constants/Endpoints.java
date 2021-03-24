@@ -23,4 +23,10 @@ public class Endpoints {
    public static final String DOCTOR_MEETING_ID = "/meetings/{id}";
    public static final String DOCTOR_MEETING_TERMINS = "/meetings/{id}/termins";
 
+   // ServiceController
+   public static final String SERVICE_ROOT = API_PREFIX + "/service";
+   public static final String SERVICE_ID = "/{id}";
+   public static final String SERVICE_DOCTORS = "/{id}/doctors";
+
+
 }

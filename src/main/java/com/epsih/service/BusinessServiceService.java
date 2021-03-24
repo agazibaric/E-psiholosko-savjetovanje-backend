@@ -3,6 +3,7 @@ package com.epsih.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.epsih.model.Doctor;
 import org.springframework.stereotype.Service;
 
 import com.epsih.exceptions.NotFoundException;
@@ -16,36 +17,42 @@ import lombok.AllArgsConstructor;
 @Service
 public class BusinessServiceService {
 
-   private final BusinessServiceRepository repository;
+   private final BusinessServiceRepository serviceRepository;
 
    public boolean contains(Long id) {
-      Optional<BusinessService> service = repository.findById(id);
+      Optional<BusinessService> service = serviceRepository.findById(id);
       return service.isPresent();
    }
 
    public List<BusinessService> allBusinessServices() {
-      return repository.findAll();
+      return serviceRepository.findAll();
    }
 
    public BusinessService businessServiceById(Long id) {
-      return repository.findById(id).orElseThrow(() -> new NotFoundException("Business with given ID does not exists"));
+      return serviceRepository.findById(id).orElseThrow(() -> new NotFoundException("Business with given ID does not exists"));
    }
 
    public void addNewBusinessService(BusinessService businessService) {
-      repository.save(businessService);
+      serviceRepository.save(businessService);
    }
 
    public void deleteBusinessType(Long id) {
-      repository.deleteById(id);
+      serviceRepository.deleteById(id);
    }
 
    public void updateById(Long id, BusinessService businessService) {
-      if (repository.existsById(id)) {
+      if (serviceRepository.existsById(id)) {
          businessService.setId(id);
-         repository.save(businessService);
+         serviceRepository.save(businessService);
       } else {
          throw new NotFoundException("Service with given Id does not exists");
       }
+   }
+
+   public List<Doctor> getServiceDoctors(Long serviceId) {
+      return serviceRepository.findById(serviceId)
+         .orElseThrow(() -> new NotFoundException("Service does not exist"))
+         .getDoctors();
    }
 
 }
