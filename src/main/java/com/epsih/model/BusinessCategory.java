@@ -25,11 +25,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity				
+@Entity
 @Table(name = "business_category", uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 @Builder
 public class BusinessCategory {
-	
+
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "pk_category")
@@ -37,14 +37,12 @@ public class BusinessCategory {
 
    @NotNull
    private String name;
-   
+
    @NotNull
    private String decription;
-   
-   @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-   @JsonManagedReference
-   @Builder.Default
-   private List<BusinessService> services = new ArrayList<>();
-   
-   
+
+   @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+   private List<BusinessService> services;
+
+
 }

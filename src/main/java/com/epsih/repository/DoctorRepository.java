@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.epsih.model.Doctor;
 
-@Repository
-public interface DoctorRepository extends JpaRepository<Doctor, Long>{
+import java.util.Optional;
 
+@Repository
+public interface DoctorRepository extends JpaRepository<Doctor, Long> {
+   Optional<Doctor> findOneByUser_Username(String username);
 }

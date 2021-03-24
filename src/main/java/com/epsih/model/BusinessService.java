@@ -2,22 +2,13 @@ package com.epsih.model;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,23 +29,24 @@ public class BusinessService {
 
    @NotNull
    private String name;
-   
+
    @NotNull
    private String description;
-   
+
    @NotNull
    private Float price;
-   
-//   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "services")
-//   @JsonManagedReference
-//   private Set<Doctor> doctors;
-   
-   @ManyToOne(fetch = FetchType.LAZY)
+
+   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "services", cascade = CascadeType.ALL)
+   @JsonIgnore
+   private List<Doctor> doctors;
+
+   @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "fk_category")
-   @JsonBackReference
+   @JsonIgnoreProperties("services")
    private BusinessCategory category;
-   
+
    @OneToMany
    @JsonIgnore
    private List<Question> questions;
+
 }

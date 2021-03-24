@@ -25,16 +25,16 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Message {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "pk_message")
-	private Long id;
-	
-	@NotNull
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime time;
-	
-	@NotNull
-	private String message;
-	
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "pk_message")
+   private Long id;
+
+   @NotNull
+   @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+   private LocalDateTime time;
+
+   @NotNull
+   private String message;
+
 }

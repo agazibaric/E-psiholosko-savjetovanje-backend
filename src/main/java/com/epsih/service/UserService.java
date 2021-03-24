@@ -22,14 +22,12 @@ import lombok.AllArgsConstructor;
 public class UserService {
 
    private final UserRepository userRepository;
-   
-   private final MeetingRepository meetingRepository;
 
    @Transactional(readOnly = true)
    public Optional<User> getUserWithAuthorities() {
 	   return SecurityUtils.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByUsername);
    }
-   
+
    @Transactional(readOnly = true)
    public List<User> getUsers() {
 	   return userRepository.findAll();
@@ -39,26 +37,13 @@ public class UserService {
    public User getById(Long id) {
       return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
    }
-   
-   @Transactional(readOnly = true)
-   public List<Meeting> getMeetings(Long id) {
-	  List<Meeting> meetings = meetingRepository.findAll();
-	  List<Meeting> targetMeetings = meetings.stream().
-			                                  filter(m -> m.getPatient().getId().equals(id) || m.getDoctor().getId().equals(id)).
-			                                  collect(Collectors.toList());
-	  return targetMeetings;
-   }
-   
+
    public void deleteUser(Long id) {
 	   userRepository.deleteById(id);
    }
-   
+
    public void saveUser(User user) {
 	   userRepository.save(user);
    }
 
-   public List<Meeting> getMyMeetings(){
-	   User me = getUserWithAuthorities().get();
-	   return getMeetings(me.getId());
-   }
 }

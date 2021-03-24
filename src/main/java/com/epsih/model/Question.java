@@ -21,15 +21,13 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Question {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "pk_question")
-	private Long id;
-	
-	@NotNull
-	private String question;
-	
-	
-	
-	
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "pk_question")
+   private Long id;
+
+   @NotNull
+   private String question;
+
+
 }

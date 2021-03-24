@@ -3,6 +3,7 @@ package com.epsih.rest;
 import java.util.List;
 import java.util.Set;
 
+import com.epsih.constants.Endpoints;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,57 +25,31 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/user")
-public class UserRestController {
+@RequestMapping(Endpoints.USER_ROOT)
+public class UserController {
 
    private final UserService userService;
 
-   @GetMapping("/me")
+   @GetMapping(Endpoints.USER_ME)
    public ResponseEntity<User> getActualUser() {
       return ResponseEntity.ok(userService.getUserWithAuthorities().get());
    }
-   
-   @GetMapping("/me/meetings")
-   public ResponseEntity<List<Meeting>> getMyMeetings() {
-	   return new ResponseEntity<>(userService.getMyMeetings(), HttpStatus.OK);
-   }
-   
+
    @GetMapping
    public ResponseEntity<List<User>> getUsers() {
       return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
    }
-   
-   @GetMapping("/{id}")
+
+   @GetMapping(Endpoints.USER_ID)
    public ResponseEntity<User> getUserById(@PathVariable Long id) {
 	   User user = userService.getById(id);
 	   return new ResponseEntity<>(user, HttpStatus.OK);
    }
-   
-   @GetMapping("/{id}/meetings")
-   public ResponseEntity<List<Meeting>> getUserMeetingById(@PathVariable Long id) {
-	   List<Meeting> meetings = userService.getMeetings(id);
-	   return new ResponseEntity<>(meetings, HttpStatus.OK);
-   }
-   
-   @PostMapping
-   public ResponseEntity<Void> registerUser(@RequestBody User user) {
-	   userService.saveUser(user);
-	   return new ResponseEntity<>(HttpStatus.OK);
-   }
-   
-   @PutMapping("/{id}")
-   public ResponseEntity<Void> updateUser(@RequestBody User user, @PathVariable Long id) {
-	   user.setId(id);
-	   userService.saveUser(user);
-	   return new ResponseEntity<>(HttpStatus.OK);
-   }
-   
-   @DeleteMapping("/{id}")
+
+   @DeleteMapping(Endpoints.USER_ID)
    public ResponseEntity<User> deleteUser(@PathVariable Long id) {
 	   userService.deleteUser(id);
 	   return new ResponseEntity<>(HttpStatus.OK);
    }
-
-
 
  }

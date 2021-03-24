@@ -1,39 +1,40 @@
 package com.epsih.model;
 
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Table(name="doctor")
-public class Doctor extends User {
-	
+public class Doctor {
+
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Long id;
+
+   @OneToOne
+   @JoinColumn(name = "fk_user", referencedColumnName = "pk_user")
+   private User user;
+
 	private String biography;
 
 	@ManyToMany
-	@JoinTable(name="doctor_service", 
-	           joinColumns = @JoinColumn(name="pk_user"), 
-	           inverseJoinColumns = @JoinColumn(name = "pk_business"))
+	@JoinTable(name="doctor_service",
+	           joinColumns = @JoinColumn(name="fk_doctor"),
+	           inverseJoinColumns = @JoinColumn(name = "fk_service"))
 	private Set<BusinessService> services;
-	
-  @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor", cascade = CascadeType.ALL)
   @JsonIgnore
-   private Set<Meeting> meetings;
+   private List<Meeting> meetings;
 }

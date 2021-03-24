@@ -27,17 +27,17 @@ public class ServiceContoller {
 
 	@GetMapping("/{id}")
 	public BusinessService getBusinessTypes(@PathVariable Long id) {
-		return service.businessTypeById(id);
+		return service.businessServiceById(id);
 	}
 
 	@GetMapping
 	public List<BusinessService> getAllBusinessTypes() {
-		return service.allBusinessTypes();
+		return service.allBusinessServices();
 	}
 
 	@PostMapping
-	public void postNewBusinessType(@Valid @RequestBody BusinessService newType) {
-	   service.addNewBusinessType(newType);
+	public void postNewBusinessType(@Valid @RequestBody BusinessService businessService) {
+	   service.addNewBusinessService(businessService);
 	}
 
 	@DeleteMapping("/{id}")

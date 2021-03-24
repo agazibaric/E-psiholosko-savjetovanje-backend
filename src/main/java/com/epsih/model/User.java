@@ -30,12 +30,11 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "user")
-@Data 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
-	
+
    @Id
    @Column(name = "pk_user")
    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,7 +72,7 @@ public class User {
    @NotNull
    @NotBlank(message = "Please enter your phone number")
    private String phoneNumber;
-   
+
    @JsonIgnore
    @Column(columnDefinition = "boolean default false")
    private boolean activated;
@@ -81,11 +80,10 @@ public class User {
    @ManyToMany
    @JoinTable(
       name = "USER_AUTHORITY",
-      joinColumns = @JoinColumn(name = "pk_user"),
+      joinColumns = @JoinColumn(name = "fk_user"),
       inverseJoinColumns = @JoinColumn(name = "name"))
    @BatchSize(size = 20)
    private Set<Authority> authorities = new HashSet<>();
 
-   
-   
+
 }
