@@ -3,6 +3,7 @@ package com.epsih.rest;
 import com.epsih.constants.Endpoints;
 import com.epsih.model.Doctor;
 import com.epsih.model.Meeting;
+import com.epsih.model.Termin;
 import com.epsih.service.DoctorService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,11 @@ public class DoctorController {
    @GetMapping(Endpoints.DOCTOR_MEETING_ID)
    public Meeting getMyMeetingById(@PathVariable("id") Long id) {
       return doctorService.getMyMeeting(id);
+   }
+
+   @GetMapping(Endpoints.DOCTOR_MEETING_TERMINS)
+   public List<Termin> getTerminsForMeeting(@PathVariable("id") Long meetingId) {
+      return doctorService.getMeetingTermins(meetingId);
    }
 
 }

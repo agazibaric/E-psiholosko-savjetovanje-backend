@@ -1,6 +1,5 @@
 package com.epsih.service;
 
-import com.epsih.exceptions.BadRequestException;
 import com.epsih.exceptions.NotFoundException;
 import com.epsih.exceptions.ServerErrorException;
 import com.epsih.exceptions.UnauthorizedException;
@@ -33,9 +32,11 @@ public class PatientService {
    }
 
    public Meeting getMyMeeting(Long id) {
-      return getMyMeetings().stream()
-         .filter(m -> m.getId().equals(id))
-         .findAny().orElseThrow(() -> new NotFoundException("Meeting does not exist"));
+      Meeting meeting = meetingRepository.findById(id)
+         .orElseThrow(() -> new NotFoundException("Meeting does not exist"));
+      if (!meeting.getPatient().getId().equals(getCurrentPatient().getId()))
+         throw new UnauthorizedException("Unauthorized to access the resource");
+      return meeting;
    }
 
    public List<Termin> getMeetingTermins(Long meetingId) {
