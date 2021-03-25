@@ -3,6 +3,7 @@ package com.epsih.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.epsih.model.Doctor;
 import org.springframework.stereotype.Service;
 
 import com.epsih.exceptions.NotFoundException;
@@ -16,36 +17,42 @@ import lombok.AllArgsConstructor;
 @Service
 public class BusinessServiceService {
 
-	private final BusinessServiceRepository repository;
+   private final BusinessServiceRepository serviceRepository;
 
-	public boolean contains(Long id) {
-		Optional<BusinessService> type = repository.findById(id);
-		return type.isPresent();
-	}
+   public boolean contains(Long id) {
+      Optional<BusinessService> service = serviceRepository.findById(id);
+      return service.isPresent();
+   }
 
-	public List<BusinessService> allBusinessTypes(){
-		return repository.findAll();
-	}
+   public List<BusinessService> allBusinessServices() {
+      return serviceRepository.findAll();
+   }
 
-	public BusinessService businessTypeById(Long id){
-		return repository.findById(id).orElseThrow(() -> new NotFoundException("Business with given ID does not exists"));
-	}
+   public BusinessService businessServiceById(Long id) {
+      return serviceRepository.findById(id).orElseThrow(() -> new NotFoundException("Business with given ID does not exists"));
+   }
 
-	public void addNewBusinessType(BusinessService newType) {
-		repository.save(newType);
-	}
+   public void addNewBusinessService(BusinessService businessService) {
+      serviceRepository.save(businessService);
+   }
 
-	public void deleteBusinessType(Long id) {
-		repository.deleteById(id);
-	}
+   public void deleteBusinessType(Long id) {
+      serviceRepository.deleteById(id);
+   }
 
-	public void updateById(Long id, BusinessService businessType) {
-	   if (repository.existsById(id)) {
-         businessType.setId(id);
-         repository.save(businessType);
+   public void updateById(Long id, BusinessService businessService) {
+      if (serviceRepository.existsById(id)) {
+         businessService.setId(id);
+         serviceRepository.save(businessService);
       } else {
-	      throw new NotFoundException("Business with given Id does not exists");
+         throw new NotFoundException("Service with given Id does not exists");
       }
+   }
+
+   public List<Doctor> getServiceDoctors(Long serviceId) {
+      return serviceRepository.findById(serviceId)
+         .orElseThrow(() -> new NotFoundException("Service does not exist"))
+         .getDoctors();
    }
 
 }

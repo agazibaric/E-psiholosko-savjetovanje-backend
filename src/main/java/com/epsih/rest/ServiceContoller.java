@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.epsih.constants.Endpoints;
+import com.epsih.model.Doctor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,34 +22,39 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/business")
+@RequestMapping(Endpoints.SERVICE_ROOT)
 public class ServiceContoller {
 
 	private final BusinessServiceService service;
 
-	@GetMapping("/{id}")
+	@GetMapping(Endpoints.SERVICE_ID)
 	public BusinessService getBusinessTypes(@PathVariable Long id) {
-		return service.businessTypeById(id);
+		return service.businessServiceById(id);
 	}
 
 	@GetMapping
 	public List<BusinessService> getAllBusinessTypes() {
-		return service.allBusinessTypes();
+		return service.allBusinessServices();
 	}
 
 	@PostMapping
-	public void postNewBusinessType(@Valid @RequestBody BusinessService newType) {
-	   service.addNewBusinessType(newType);
+	public void postNewBusinessType(@Valid @RequestBody BusinessService businessService) {
+	   service.addNewBusinessService(businessService);
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping(Endpoints.SERVICE_ID)
 	public void deleteBusinessType(@PathVariable Long id) {
 		service.deleteBusinessType(id);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping(Endpoints.SERVICE_ID)
 	public void updateBusinessType(@PathVariable Long id, @RequestBody BusinessService newType) {
 		service.updateById(id, newType);
 	}
+
+	@GetMapping(Endpoints.SERVICE_DOCTORS)
+	public List<Doctor> getServiceDoctors(@PathVariable("id") Long serviceId) {
+      return service.getServiceDoctors(serviceId);
+   }
 
 }

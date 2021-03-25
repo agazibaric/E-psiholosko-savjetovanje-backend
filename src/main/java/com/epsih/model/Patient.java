@@ -1,21 +1,38 @@
 package com.epsih.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.util.List;
+
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Table(name="patient")
-public class Patient extends User{
-	
+@Table(name = "patient")
+public class Patient {
+
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Long id;
+
+   @OneToOne
+   @JoinColumn(name = "fk_user", referencedColumnName = "pk_user")
+   private User user;
+
    private String diagnosis;
+
+   @OneToMany(fetch = FetchType.LAZY, mappedBy = "patient", cascade = CascadeType.ALL)
+   @JsonIgnore
+   private List<Meeting> meetings;
+
+   @OneToMany(fetch = FetchType.LAZY, mappedBy = "patient", cascade = CascadeType.ALL)
+   @JsonIgnore
+   private List<Review> reviews;
 
 }

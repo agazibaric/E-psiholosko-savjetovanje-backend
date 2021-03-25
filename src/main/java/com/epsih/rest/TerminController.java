@@ -2,7 +2,10 @@ package com.epsih.rest;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.validation.Valid;
+
+import com.epsih.constants.Endpoints;
+import com.epsih.dto.TerminDto;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,40 +21,37 @@ import com.epsih.service.TerminService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.validation.Valid;
-
 @RestController
-@RequestMapping("/api/termin")
+@RequestMapping(Endpoints.TERMIN_ROOT)
 @AllArgsConstructor
 @Data
 public class TerminController {
 
-	@Autowired
-	private final TerminService service;
+   private final TerminService service;
 
-	@GetMapping("/{id}")
-	public Termin getTermin(@PathVariable Long id) {
-		return service.terminById(id);
-	}
+   @GetMapping(Endpoints.TERMIN_ID)
+   public Termin getTermin(@PathVariable Long id) {
+      return service.terminById(id);
+   }
 
-	@GetMapping
-	public List<Termin> getAllTermins() {
-		return service.allTermins();
-	}
+   @GetMapping
+   public List<Termin> getAllTermins() {
+      return service.allTermins();
+   }
 
-	@PostMapping
-	public void newTermin(@Valid @RequestBody Termin termin) {
-	   service.addTermin(termin);
-	}
+   @PostMapping
+   public void newTermin(@Valid @RequestBody TerminDto terminDto) {
+      service.addTermin(terminDto);
+   }
 
-	@DeleteMapping("/{id}")
-	public void deleteTermin(@PathVariable Long id) {
-		service.deleteTermin(id);
-	}
+   @DeleteMapping(Endpoints.TERMIN_ID)
+   public void deleteTermin(@PathVariable Long id) {
+      service.deleteTermin(id);
+   }
 
-	@PutMapping("/{id}")
-	public void updateTermin(@RequestBody Termin termin, @PathVariable Long id) {
-		service.updateById(id, termin);
-	}
+   @PutMapping(Endpoints.TERMIN_ID)
+   public void updateTermin(@Valid @RequestBody TerminDto terminDto, @PathVariable Long id) {
+      service.updateById(id, terminDto);
+   }
 
 }

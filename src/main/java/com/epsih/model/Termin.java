@@ -2,15 +2,14 @@ package com.epsih.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.epsih.enums.TerminType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,17 +23,26 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Termin {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Long id;
 
-	@NotNull
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime terminStart;
+   @NotNull
+   @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+   private LocalDateTime terminStart;
 
-	@NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime terminEnd;
+   @NotNull
+   @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+   private LocalDateTime terminEnd;
 
-	private String description;
+   private String description;
+
+   @Column(name = "termin_type")
+   private TerminType terminType;
+
+   @ManyToOne
+   @JoinColumn(name = "fk_meeting")
+   @JsonIgnore
+   private Meeting meeting;
+
 }

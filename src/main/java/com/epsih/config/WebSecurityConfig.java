@@ -1,6 +1,7 @@
 package com.epsih.config;
 
 import com.epsih.constants.AuthorityConstants;
+import com.epsih.constants.Endpoints;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -65,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
    @Override
    protected void configure(HttpSecurity httpSecurity) throws Exception {
       httpSecurity
-         // we don't need CSRF because our token is invulnerable
+         // We don't need CSRF because our token is invulnerable
          .csrf().disable()
 
          .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
@@ -74,13 +75,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .authenticationEntryPoint(authenticationErrorHandler)
          .accessDeniedHandler(jwtAccessDeniedHandler)
 
-         // enable h2-console
+         // Enable h2-console
          .and()
          .headers()
          .frameOptions()
          .sameOrigin()
 
-         // create no session
+         // Create no session
          .and()
          .sessionManagement()
          .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -90,20 +91,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .antMatchers("/api/authenticate").permitAll()
          .antMatchers("/api/register").permitAll()
          .antMatchers("/api/activate/*").permitAll()
-         // .antMatchers("/api/account/reset-password/init").permitAll()
-         // .antMatchers("/api/account/reset-password/finish").permitAll()
 
          .antMatchers("/api/admin").hasAuthority(AuthorityConstants.ROLE_ADMIN)
-         .antMatchers(HttpMethod.POST, "/api/business").hasAuthority(AuthorityConstants.ROLE_ADMIN)
-         .antMatchers(HttpMethod.PUT, "/api/business").hasAuthority(AuthorityConstants.ROLE_ADMIN)
-         .antMatchers(HttpMethod.DELETE, "/api/business").hasAuthority(AuthorityConstants.ROLE_ADMIN)
-         .antMatchers(HttpMethod.GET, "/api/business").permitAll()
 
-         .antMatchers(HttpMethod.POST, "/api/termin").hasAuthority(AuthorityConstants.ROLE_SPECIAL_USER)
-         .antMatchers(HttpMethod.DELETE, "/api/termin").hasAuthority(AuthorityConstants.ROLE_SPECIAL_USER)
-         .antMatchers(HttpMethod.PUT, "/api/termin").hasAuthority(AuthorityConstants.ROLE_SPECIAL_USER)
-         .antMatchers(HttpMethod.GET, "/api/termin").hasAuthority(AuthorityConstants.ROLE_USER)
+         .antMatchers(HttpMethod.GET, "/api/category").permitAll()
+         .antMatchers(HttpMethod.GET, "/api/service").permitAll()
 
+         .antMatchers(Endpoints.PATIENT_ROOT).hasAuthority(AuthorityConstants.ROLE_USER)
+         .antMatchers(Endpoints.PATIENT_ROOT + "/**").hasAuthority(AuthorityConstants.ROLE_USER)
+         .antMatchers(Endpoints.DOCTOR_ROOT).hasAuthority(AuthorityConstants.ROLE_DOCTOR)
+         .antMatchers(Endpoints.DOCTOR_ROOT + "/**").hasAuthority(AuthorityConstants.ROLE_DOCTOR)
 
          .anyRequest().authenticated()
 

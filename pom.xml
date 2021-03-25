@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
    <modelVersion>4.0.0</modelVersion>
 
-   <groupId>org.zerhusen</groupId>
-   <artifactId>jwtdemo</artifactId>
-   <version>2.0.0</version>
+   <groupId>com.epsih</groupId>
+   <artifactId>e-psychological-counseling</artifactId>
+   <version>1.0.0</version>
    <packaging>jar</packaging>
 
-   <name>jwtdemo</name>
-   <description>Demo project for JWT with Spring Security</description>
+   <name>e-psychological-counseling</name>
+   <description>Application for online psychological counseling</description>
 
    <parent>
       <groupId>org.springframework.boot</groupId>

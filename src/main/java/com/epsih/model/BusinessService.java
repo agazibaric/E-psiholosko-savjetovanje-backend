@@ -1,19 +1,14 @@
 package com.epsih.model;
 
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,17 +29,24 @@ public class BusinessService {
 
    @NotNull
    private String name;
-   
+
    @NotNull
    private String description;
-   
+
    @NotNull
    private Float price;
-   
-   @ManyToMany(mappedBy = "services")
-   private Set<Doctor> doctors;
-   
-   @ManyToOne
+
+   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "services", cascade = CascadeType.ALL)
+   @JsonIgnore
+   private List<Doctor> doctors;
+
+   @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "fk_category")
+   @JsonIgnoreProperties("services")
    private BusinessCategory category;
+
+   @OneToMany
+   @JsonIgnore
+   private List<Question> questions;
+
 }
