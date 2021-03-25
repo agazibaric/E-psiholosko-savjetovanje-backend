@@ -8,9 +8,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class LoginDto {
+@NoArgsConstructor
+public class RegisterDto {
 
    @NotNull
    @Size(min = 1, max = 50)
@@ -20,6 +20,19 @@ public class LoginDto {
    @Size(min = 4, max = 100)
    private String password;
 
-   private Boolean rememberMe;
+   @NotNull
+   @Size(min = 4, max = 50)
+   private String firstname;
+
+   @NotNull
+   @Size(min = 4, max = 50)
+   private String lastname;
+
+   @NotNull
+   @Size(min = 4, max = 50)
+   private String email;
+
+   @NotNull
+   private String phoneNumber;
 
 }

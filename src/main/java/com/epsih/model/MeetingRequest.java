@@ -5,18 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "AUTHORITY")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Authority {
+public class MeetingRequest {
 
    @Id
-   @Column(name = "NAME", length = 50)
-   @NotNull
-   private String name;
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "pk_meeting_request")
+   private Long id;
+
 
 }

@@ -1,5 +1,8 @@
 package com.epsih.config;
 
+import com.epsih.constants.AuthorityConstants;
+import com.epsih.constants.Endpoints;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -63,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
    @Override
    protected void configure(HttpSecurity httpSecurity) throws Exception {
       httpSecurity
-         // we don't need CSRF because our token is invulnerable
+         // We don't need CSRF because our token is invulnerable
          .csrf().disable()
 
          .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
@@ -72,13 +75,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .authenticationEntryPoint(authenticationErrorHandler)
          .accessDeniedHandler(jwtAccessDeniedHandler)
 
-         // enable h2-console
+         // Enable h2-console
          .and()
          .headers()
          .frameOptions()
          .sameOrigin()
 
-         // create no session
+         // Create no session
          .and()
          .sessionManagement()
          .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -86,13 +89,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .and()
          .authorizeRequests()
          .antMatchers("/api/authenticate").permitAll()
-         // .antMatchers("/api/register").permitAll()
-         // .antMatchers("/api/activate").permitAll()
-         // .antMatchers("/api/account/reset-password/init").permitAll()
-         // .antMatchers("/api/account/reset-password/finish").permitAll()
+         .antMatchers("/api/register").permitAll()
+         .antMatchers("/api/activate/*").permitAll()
 
-         .antMatchers("/api/person").hasAuthority("ROLE_USER")
-         .antMatchers("/api/admin").hasAuthority("ROLE_ADMIN")
+         .antMatchers("/api/admin").hasAuthority(AuthorityConstants.ROLE_ADMIN)
+
+         .antMatchers(HttpMethod.GET, "/api/category").permitAll()
+         .antMatchers(HttpMethod.GET, "/api/service").permitAll()
+
+         .antMatchers(Endpoints.PATIENT_ROOT).hasAuthority(AuthorityConstants.ROLE_USER)
+         .antMatchers(Endpoints.PATIENT_ROOT + "/**").hasAuthority(AuthorityConstants.ROLE_USER)
+         .antMatchers(Endpoints.DOCTOR_ROOT).hasAuthority(AuthorityConstants.ROLE_DOCTOR)
+         .antMatchers(Endpoints.DOCTOR_ROOT + "/**").hasAuthority(AuthorityConstants.ROLE_DOCTOR)
 
          .anyRequest().authenticated()
 
@@ -102,5 +110,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
    private JWTConfigurer securityConfigurerAdapter() {
       return new JWTConfigurer(tokenProvider);
+   }
+
+   @Bean
+   public ModelMapper modelMapper() {
+      return new ModelMapper();
    }
 }
