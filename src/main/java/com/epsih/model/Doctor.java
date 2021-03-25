@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name="doctor")
+@Table(name = "doctor")
 public class Doctor {
 
    @Id
@@ -26,15 +26,21 @@ public class Doctor {
    @JoinColumn(name = "fk_user", referencedColumnName = "pk_user")
    private User user;
 
-	private String biography;
+   private String biography;
 
-	@ManyToMany
-	@JoinTable(name="doctor_service",
-	           joinColumns = @JoinColumn(name="fk_doctor"),
-	           inverseJoinColumns = @JoinColumn(name = "fk_service"))
-	private Set<BusinessService> services;
+   @ManyToMany
+   @JoinTable(name = "doctor_service",
+      joinColumns = @JoinColumn(name = "fk_doctor"),
+      inverseJoinColumns = @JoinColumn(name = "fk_service"))
+   private Set<BusinessService> services;
 
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor", cascade = CascadeType.ALL)
-  @JsonIgnore
+   // TODO: change to lazy
+   @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor", cascade = CascadeType.ALL)
+   @JsonIgnore
    private List<Meeting> meetings;
+
+   @OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor", cascade = CascadeType.ALL)
+   @JsonIgnore
+   private List<Review> reviews;
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.epsih.constants.Endpoints;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,12 +23,12 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/category")
+@RequestMapping(Endpoints.CATEGORY_ROOT)
 public class CategoryContoller {
 
 	private final BusinessCategoryService service;
 
-	@GetMapping("/{id}")
+	@GetMapping(Endpoints.CATEGORY_ID)
 	public ResponseEntity<BusinessCategory> getCategoryById(@PathVariable Long id) {
 		return new ResponseEntity<>(service.businessCategoryById(id), HttpStatus.OK);
 	}
@@ -43,13 +44,13 @@ public class CategoryContoller {
 	   return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping(Endpoints.CATEGORY_ID)
 	public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
 		service.deleteBusinessCategory(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping(Endpoints.CATEGORY_ID)
 	public ResponseEntity<BusinessCategory> updateBusinessType(@PathVariable Long id, @RequestBody BusinessCategory category) {
 		service.updateById(id, category);
 		BusinessCategory updated = service.businessCategoryById(id);

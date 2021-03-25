@@ -5,6 +5,7 @@ import com.epsih.exceptions.ServerErrorException;
 import com.epsih.exceptions.UnauthorizedException;
 import com.epsih.model.Doctor;
 import com.epsih.model.Meeting;
+import com.epsih.model.Review;
 import com.epsih.model.Termin;
 import com.epsih.repository.DoctorRepository;
 import com.epsih.repository.MeetingRepository;
@@ -45,6 +46,10 @@ public class DoctorService {
       if (!meeting.getDoctor().getId().equals(getCurrentDoctor().getId()))
          throw new UnauthorizedException("Unauthorized to access the resource");
       return meeting.getTermins();
+   }
+
+   public List<Review> getMyReviews() {
+      return getCurrentDoctor().getReviews();
    }
 
 }

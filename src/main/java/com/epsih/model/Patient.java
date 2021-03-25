@@ -30,4 +30,9 @@ public class Patient {
    @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient", cascade = CascadeType.ALL)
    @JsonIgnore
    private List<Meeting> meetings;
+
+   @OneToMany(fetch = FetchType.LAZY, mappedBy = "patient", cascade = CascadeType.ALL)
+   @JsonIgnore
+   private List<Review> reviews;
+
 }

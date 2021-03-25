@@ -4,6 +4,7 @@ import static org.springframework.http.HttpStatus.OK;
 
 import javax.validation.Valid;
 
+import com.epsih.constants.Endpoints;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,29 +28,27 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping(Endpoints.AUTH_ROOT)
 public class AuthController {
 
    private final AuthService authService;
 
-   @PostMapping("/authenticate")
-   public ResponseEntity<JWTToken> authenticate(@Valid @RequestBody LoginDto loginDto) {
+   @PostMapping(Endpoints.AUTH_LOGIN)
+   public ResponseEntity<JWTToken> login(@Valid @RequestBody LoginDto loginDto) {
       String jwt = authService.authenticate(loginDto);
-
       HttpHeaders httpHeaders = new HttpHeaders();
       httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-
       return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
    }
 
-   @PostMapping("/register")
+   @PostMapping(Endpoints.AUTH_REGISTER)
    public ResponseEntity<Void> register(@Valid @RequestBody RegisterDto registerDto) {
       authService.register(registerDto);
       return ResponseEntity.ok().build();
    }
 
-   @GetMapping("activate/{token}")
-   public ResponseEntity<String> verifyAccount(@PathVariable String token) {
+   @GetMapping(Endpoints.AUTH_ACTIVATE)
+   public ResponseEntity<String> activateAccount(@PathVariable String token) {
       authService.activateAccount(token);
       return new ResponseEntity<>("Account activated successfully", OK);
    }

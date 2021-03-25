@@ -3,6 +3,7 @@ package com.epsih.rest;
 import com.epsih.constants.Endpoints;
 import com.epsih.model.Doctor;
 import com.epsih.model.Meeting;
+import com.epsih.model.Review;
 import com.epsih.model.Termin;
 import com.epsih.service.DoctorService;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,11 @@ public class DoctorController {
    @GetMapping(Endpoints.DOCTOR_MEETING_TERMINS)
    public List<Termin> getTerminsForMeeting(@PathVariable("id") Long meetingId) {
       return doctorService.getMeetingTermins(meetingId);
+   }
+
+   @GetMapping(Endpoints.DOCTOR_REVIEWS)
+   public List<Review> getMyReviews() {
+      return doctorService.getMyReviews();
    }
 
 }
