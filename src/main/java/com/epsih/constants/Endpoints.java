@@ -44,4 +44,8 @@ public class Endpoints {
    public static final String REVIEW_ROOT = API_PREFIX + "/review";
    public static final String REVIEW_ID = "/{id}}";
 
+   // Termin Controller
+   public static final String TERMIN_ROOT = API_PREFIX + "/termin";
+   public static final String TERMIN_ID = "/{id}";
+
 }
