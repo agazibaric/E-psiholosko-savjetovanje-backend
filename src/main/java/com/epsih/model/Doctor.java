@@ -34,8 +34,7 @@ public class Doctor {
       inverseJoinColumns = @JoinColumn(name = "fk_service"))
    private Set<BusinessService> services;
 
-   // TODO: change to lazy
-   @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor", cascade = CascadeType.ALL)
+   @OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor", cascade = CascadeType.ALL)
    @JsonIgnore
    private List<Meeting> meetings;
 

@@ -27,7 +27,7 @@ public class Patient {
 
    private String diagnosis;
 
-   @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient", cascade = CascadeType.ALL)
+   @OneToMany(fetch = FetchType.LAZY, mappedBy = "patient", cascade = CascadeType.ALL)
    @JsonIgnore
    private List<Meeting> meetings;
 
