@@ -2,7 +2,6 @@ package com.epsih.config;
 
 import com.epsih.constants.AuthorityConstants;
 import com.epsih.constants.Endpoints;
-import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -96,6 +95,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
          .antMatchers(HttpMethod.GET, "/api/category").permitAll()
          .antMatchers(HttpMethod.GET, "/api/service").permitAll()
+         .antMatchers("/ws/**").permitAll()
 
          .antMatchers(Endpoints.PATIENT_ROOT).hasAuthority(AuthorityConstants.ROLE_USER)
          .antMatchers(Endpoints.PATIENT_ROOT + "/**").hasAuthority(AuthorityConstants.ROLE_USER)
@@ -112,8 +112,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       return new JWTConfigurer(tokenProvider);
    }
 
-   @Bean
-   public ModelMapper modelMapper() {
-      return new ModelMapper();
-   }
 }

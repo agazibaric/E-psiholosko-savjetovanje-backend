@@ -37,7 +37,6 @@ public class Meeting {
    private Doctor doctor;
 
    @OneToMany(fetch = FetchType.EAGER, mappedBy = "meeting", cascade = CascadeType.ALL)
-   @NotNull
    @JsonIgnoreProperties("meeting")
    private List<Termin> termins;
 
@@ -49,7 +48,7 @@ public class Meeting {
 
    private String description;
 
-   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   @OneToMany(mappedBy = "meeting", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
    @JsonIgnore
    private List<Message> messages;
 
