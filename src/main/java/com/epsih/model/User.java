@@ -76,14 +76,5 @@ public class User {
       inverseJoinColumns = @JoinColumn(name = "name"))
    @BatchSize(size = 20)
    private Set<Authority> authorities = new HashSet<>();
-//
-//   @OneToMany(mappedBy = "recipient", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-//   @JsonIgnore
-//   private List<Message> receivedMessages;
-//
-//   @OneToMany(mappedBy = "sender", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-//   @JsonIgnore
-//   private List<Message> sentMessages;
-
 
 }

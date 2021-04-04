@@ -20,7 +20,7 @@ public class WebSocketController {
    private final ChatService chatService;
 
    @MessageMapping("/message")
-   public void sendSpecific(@Payload MessageInputDto messageInputDto, @Header("simpSessionId") String sessionId, Principal user) {
+   public void sendToSpecificUser(@Payload MessageInputDto messageInputDto, @Header("simpSessionId") String sessionId, Principal user) {
       chatService.sendMessage(user.getName(), messageInputDto);
    }
 
