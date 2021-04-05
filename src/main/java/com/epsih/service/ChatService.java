@@ -1,13 +1,16 @@
 package com.epsih.service;
 
 import com.epsih.dto.MessageInputDto;
+import com.epsih.dto.MessageOutputDto;
 import com.epsih.enums.MessageType;
 import com.epsih.exceptions.NotFoundException;
+import com.epsih.exceptions.UnauthorizedException;
 import com.epsih.model.Meeting;
 import com.epsih.model.Message;
 import com.epsih.repository.MeetingRepository;
 import com.epsih.repository.MessageRepository;
 import com.epsih.repository.UserRepository;
+import com.epsih.security.SecurityUtils;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -47,10 +51,19 @@ public class ChatService {
    }
 
    @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
-   public List<Message> getAllMyMessages(Long meetingId) {
+   public List<MessageOutputDto> getAllMyMessages(Long meetingId) {
       Meeting meeting = meetingRepository.findById(meetingId)
          .orElseThrow(() -> new NotFoundException("Meeting not found"));
-      return meeting.getMessages();
+      return meeting.getMessages().stream()
+         .map(msg -> MessageOutputDto.builder()
+            .content(msg.getContent())
+            .creationDate(msg.getCreationDate())
+            .type(msg.getMessageType().toString().toLowerCase())
+            .self(SecurityUtils.getCurrentUsername()
+               .orElseThrow(() -> new UnauthorizedException("Unauthorized to view resource"))
+               .equals(msg.getSender().getUsername()))
+            .build())
+         .collect(Collectors.toList());
    }
 
 }

@@ -1,5 +1,6 @@
 package com.epsih.rest;
 
+import com.epsih.dto.MessageOutputDto;
 import com.epsih.model.Message;
 import com.epsih.service.ChatService;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class MeetingController {
    private final ChatService chatService;
 
    @GetMapping("/{meetingId}/messages")
-   public List<Message> getAllMyMessagesForMeeting(@PathVariable("meetingId") Long meetingId) {
+   public List<MessageOutputDto> getAllMyMessagesForMeeting(@PathVariable("meetingId") Long meetingId) {
       return chatService.getAllMyMessages(meetingId);
    }
 
