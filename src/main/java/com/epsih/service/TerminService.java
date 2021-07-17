@@ -1,12 +1,10 @@
 package com.epsih.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.epsih.dto.TerminDto;
 import com.epsih.exceptions.BadRequestException;
 import com.epsih.repository.MeetingRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.epsih.exceptions.NotFoundException;
@@ -45,7 +43,7 @@ public class TerminService {
          .terminEnd(terminDto.getTerminEnd())
          .terminType(terminDto.getTerminType())
          .meeting(meetingRepository.findById(terminDto.getMeetingId())
-         .orElseThrow(() -> new NotFoundException("Meeting does no exist")))
+            .orElseThrow(() -> new NotFoundException("Meeting does no exist")))
          .build();
       terminRepository.save(termin);
    }

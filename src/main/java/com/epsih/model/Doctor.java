@@ -28,10 +28,11 @@ public class Doctor {
 
    private String biography;
 
-   @ManyToMany
+   @ManyToMany(fetch = FetchType.LAZY)
    @JoinTable(name = "doctor_service",
       joinColumns = @JoinColumn(name = "fk_doctor"),
       inverseJoinColumns = @JoinColumn(name = "fk_service"))
+   @JsonIgnore
    private Set<BusinessService> services;
 
    @OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor", cascade = CascadeType.ALL)
