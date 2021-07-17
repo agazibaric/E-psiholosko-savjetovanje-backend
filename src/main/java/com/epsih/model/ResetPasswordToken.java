@@ -15,16 +15,19 @@ import static javax.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "activation_token")
+@Table(name = "reset_password_token")
 @Builder
-public class ActivationToken {
+public class ResetPasswordToken {
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long id;
-    @Column(unique = true)
-    private String token;
-    @OneToOne(fetch = LAZY)
-    private User user;
-    private Instant expiryDate;
+   public static final Integer DAYS_TO_EXPIRE = 1;
+
+   @Id
+   @GeneratedValue(strategy = IDENTITY)
+   private Long id;
+   @Column(unique = true)
+   private String token;
+   @OneToOne(fetch = LAZY)
+   private User user;
+   private Instant expiryDate;
+
 }
