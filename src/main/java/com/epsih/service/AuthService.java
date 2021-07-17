@@ -12,7 +12,6 @@ import com.epsih.repository.AuthorityRepository;
 import com.epsih.repository.UserRepository;
 import com.epsih.security.jwt.TokenProvider;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -21,10 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -34,7 +30,6 @@ public class AuthService {
    private final AuthenticationManagerBuilder authenticationManagerBuilder;
    private final ActivationTokenRepository activationTokenRepository;
    private final UserRepository userRepository;
-   private final ModelMapper modelMapper;
    private final PasswordEncoder passwordEncoder;
    private final AuthorityRepository authorityRepository;
 
@@ -45,7 +40,7 @@ public class AuthService {
       Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
       SecurityContextHolder.getContext().setAuthentication(authentication);
 
-      boolean rememberMe = (loginDto.getRememberMe() == null) ? false : loginDto.getRememberMe();
+      boolean rememberMe = loginDto.getRememberMe() != null && loginDto.getRememberMe();
       return tokenProvider.createToken(authentication, rememberMe);
    }
 
@@ -59,10 +54,16 @@ public class AuthService {
       if (userRepository.findByUsername(registerDto.getUsername()).isPresent())
          throw new UserException("User with given username already exists");
 
-      User user = modelMapper.map(registerDto, User.class);
-      user.setPassword(passwordEncoder.encode(user.getPassword()));
-      user.setAuthorities(new HashSet<>(Arrays.asList(authorityRepository.getOne(AuthorityConstants.ROLE_USER))));
-      user.setActivated(false);
+      User user = User.builder()
+         .email(registerDto.getEmail())
+         .firstname(registerDto.getFirstname())
+         .lastname(registerDto.getLastname())
+         .username(registerDto.getUsername())
+         .phoneNumber(registerDto.getPhoneNumber())
+         .password(passwordEncoder.encode(registerDto.getPassword()))
+         .authorities(new HashSet<>(Collections.singletonList(authorityRepository.getOne(AuthorityConstants.ROLE_USER))))
+         .activated(false)
+         .build();
 
       userRepository.save(user);
 
