@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import com.epsih.constants.Endpoints;
 import com.epsih.dto.ChangePasswordDto;
+import com.epsih.dto.ResetPasswordDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,6 +59,18 @@ public class AuthController {
    public ResponseEntity<String> changePassword(@Valid @RequestBody ChangePasswordDto changePasswordDto) {
       authService.changePassword(changePasswordDto);
       return new ResponseEntity<>("Password is successfully changed", OK);
+   }
+
+   @PostMapping(Endpoints.AUTH_REQUEST_RESET_PASSWORD)
+   public ResponseEntity<String> requestResetPassword() {
+      authService.requestResetPassword();
+      return new ResponseEntity<>("You will receive reset password link on your email", OK);
+   }
+
+   @PostMapping(Endpoints.AUTH_RESET_PASSWORD)
+   public ResponseEntity<String> resetPassword(@Valid @RequestBody ResetPasswordDto resetPasswordDto) {
+      authService.resetPassword(resetPasswordDto);
+      return new ResponseEntity<>("Password is updated successfully", OK);
    }
 
 }

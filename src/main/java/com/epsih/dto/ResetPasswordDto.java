@@ -10,11 +10,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChangePasswordDto {
-
-   @NotNull
-   @Size(min = 4, max = 100)
-   private String oldPassword;
+public class ResetPasswordDto {
 
    @NotNull
    @Size(min = 4, max = 100)
@@ -23,5 +19,8 @@ public class ChangePasswordDto {
    @NotNull
    @Size(min = 4, max = 100)
    private String confirmPassword;
+
+   @NotNull
+   private String token;
 
 }
