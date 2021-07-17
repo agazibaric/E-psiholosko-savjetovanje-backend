@@ -59,6 +59,7 @@ public class ChatService {
             .content(msg.getContent())
             .creationDate(msg.getCreationDate())
             .type(msg.getMessageType().toString().toLowerCase())
+            .meetingId(meetingId)
             .self(SecurityUtils.getCurrentUsername()
                .orElseThrow(() -> new UnauthorizedException("Unauthorized to view resource"))
                .equals(msg.getSender().getUsername()))

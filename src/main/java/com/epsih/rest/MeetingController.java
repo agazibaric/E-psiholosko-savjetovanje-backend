@@ -1,7 +1,6 @@
 package com.epsih.rest;
 
 import com.epsih.dto.MessageOutputDto;
-import com.epsih.model.Message;
 import com.epsih.service.ChatService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

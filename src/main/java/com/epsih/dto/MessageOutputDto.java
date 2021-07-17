@@ -17,5 +17,6 @@ public class MessageOutputDto {
    private boolean self;
    private String type;
    private LocalDateTime creationDate;
+   private Long meetingId;
    
 }
