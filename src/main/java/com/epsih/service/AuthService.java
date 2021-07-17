@@ -1,6 +1,7 @@
 package com.epsih.service;
 
 import com.epsih.constants.AuthorityConstants;
+import com.epsih.dto.ChangePasswordDto;
 import com.epsih.dto.LoginDto;
 import com.epsih.dto.RegisterDto;
 import com.epsih.exceptions.BadRequestException;
@@ -32,6 +33,7 @@ public class AuthService {
    private final UserRepository userRepository;
    private final PasswordEncoder passwordEncoder;
    private final AuthorityRepository authorityRepository;
+   private final UserService userService;
 
    public String authenticate(LoginDto loginDto) {
       UsernamePasswordAuthenticationToken authenticationToken =
@@ -70,6 +72,22 @@ public class AuthService {
       String token = generateActivationToken(user);
       // TODO: send activation mail with token
    }
+
+   public void changePassword(ChangePasswordDto changePasswordDto) {
+      User user = userService.getUserWithAuthorities().get();
+      if (!user.getPassword().equals(passwordEncoder.encode(changePasswordDto.getOldPassword())))
+         throw new BadRequestException("You entered wrong old password");
+      if (!changePasswordDto.getNewPassword().equals(changePasswordDto.getRepeatPassword()))
+         throw new BadRequestException("New password and repeated password do not match");
+
+      user.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
+      userRepository.save(user);
+   }
+
+
+   //////////////////////////////////
+   // Private methods:
+   //////////////////////////////////
 
    private void fetchUserAndEnable(ActivationToken activationToken) {
       String username = activationToken.getUser().getUsername();

@@ -35,6 +35,7 @@ public class Endpoints {
    public static final String AUTH_LOGIN = "/authenticate";
    public static final String AUTH_REGISTER = "/register";
    public static final String AUTH_ACTIVATE = "/activate/{token}";
+   public static final String AUTH_CHANGE_PASSWORD = "/changePassword";
 
    // CategoryController
    public static final String CATEGORY_ROOT = API_PREFIX + "/category";
