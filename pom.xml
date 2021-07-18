@@ -8,7 +8,7 @@
    <version>1.0.0</version>
    <packaging>jar</packaging>
 
-   <name>e-psychological-counseling</name>
+   <name>E-Psychological-Counseling</name>
    <description>Application for online psychological counseling</description>
 
    <parent>
@@ -93,6 +93,13 @@
          <version>1.18.16</version>
          <scope>provided</scope>
       </dependency>
+
+      <dependency>
+         <groupId>org.springdoc</groupId>
+         <artifactId>springdoc-openapi-ui</artifactId>
+         <version>1.5.9</version>
+      </dependency>
+
    </dependencies>
 
    <build>
