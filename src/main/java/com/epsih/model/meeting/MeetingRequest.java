@@ -1,4 +1,4 @@
-package com.epsih.model;
+package com.epsih.model.meeting;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

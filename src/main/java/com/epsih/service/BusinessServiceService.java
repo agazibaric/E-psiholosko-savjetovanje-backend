@@ -3,11 +3,11 @@ package com.epsih.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.epsih.model.Doctor;
+import com.epsih.model.user.Doctor;
 import org.springframework.stereotype.Service;
 
 import com.epsih.exceptions.NotFoundException;
-import com.epsih.model.BusinessService;
+import com.epsih.model.service.BusinessService;
 import com.epsih.repository.BusinessServiceRepository;
 
 import lombok.AllArgsConstructor;

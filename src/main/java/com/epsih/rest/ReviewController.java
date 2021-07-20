@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.epsih.dto.ReviewDto;
-import com.epsih.model.Review;
+import com.epsih.model.meeting.Review;
 import com.epsih.service.ReviewService;
 
 import lombok.AllArgsConstructor;

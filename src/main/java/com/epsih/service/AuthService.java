@@ -7,9 +7,9 @@ import com.epsih.dto.RegisterDto;
 import com.epsih.dto.ResetPasswordDto;
 import com.epsih.exceptions.BadRequestException;
 import com.epsih.exceptions.UserException;
-import com.epsih.model.ActivationToken;
-import com.epsih.model.ResetPasswordToken;
-import com.epsih.model.User;
+import com.epsih.model.user.ActivationToken;
+import com.epsih.model.user.ResetPasswordToken;
+import com.epsih.model.user.User;
 import com.epsih.repository.ActivationTokenRepository;
 import com.epsih.repository.AuthorityRepository;
 import com.epsih.repository.ResetPasswordTokenRepository;
@@ -26,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.Period;
-import java.time.temporal.TemporalAmount;
 import java.util.*;
 
 @Service

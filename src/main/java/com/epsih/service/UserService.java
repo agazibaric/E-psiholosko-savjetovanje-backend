@@ -2,15 +2,12 @@ package com.epsih.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.epsih.exceptions.NotFoundException;
-import com.epsih.model.Meeting;
-import com.epsih.model.User;
-import com.epsih.repository.MeetingRepository;
+import com.epsih.model.user.User;
 import com.epsih.repository.UserRepository;
 import com.epsih.security.SecurityUtils;
 

@@ -1,4 +1,4 @@
-package com.epsih.model;
+package com.epsih.model.meeting;
 
 import java.time.LocalDateTime;
 
@@ -7,6 +7,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.epsih.enums.MessageType;
+import com.epsih.model.meeting.Meeting;
+import com.epsih.model.user.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

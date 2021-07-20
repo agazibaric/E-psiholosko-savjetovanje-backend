@@ -1,10 +1,12 @@
-package com.epsih.model;
+package com.epsih.model.meeting;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.epsih.model.user.Doctor;
+import com.epsih.model.user.Patient;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

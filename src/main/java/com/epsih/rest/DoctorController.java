@@ -1,10 +1,10 @@
 package com.epsih.rest;
 
 import com.epsih.constants.Endpoints;
-import com.epsih.model.Doctor;
-import com.epsih.model.Meeting;
-import com.epsih.model.Review;
-import com.epsih.model.Termin;
+import com.epsih.model.user.Doctor;
+import com.epsih.model.meeting.Meeting;
+import com.epsih.model.meeting.Review;
+import com.epsih.model.meeting.Termin;
 import com.epsih.service.DoctorService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

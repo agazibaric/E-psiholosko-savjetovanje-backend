@@ -1,7 +1,6 @@
-package com.epsih.model;
+package com.epsih.model.user;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
