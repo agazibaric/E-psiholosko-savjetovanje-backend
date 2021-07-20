@@ -108,42 +108,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
          </plugin>
+
       </plugins>
    </build>
-
-   <profiles>
-      <profile>
-         <id>build-docker</id>
-         <build>
-            <plugins>
-               <plugin>
-                  <groupId>com.spotify</groupId>
-                  <artifactId>dockerfile-maven-plugin</artifactId>
-                  <version>${dockerfile-maven-plugin.version}</version>
-                  <executions>
-                     <execution>
-                        <id>default</id>
-                        <goals>
-                           <goal>build</goal>
-                           <goal>push</goal>
-                        </goals>
-                        <!-- I don't have deployment -->
-                        <phase>pre-integration-test</phase>
-                     </execution>
-                  </executions>
-                  <configuration>
-                     <dockerfile>${project.basedir}/src/main/docker/Dockerfile</dockerfile>
-                     <repository>hubae/jwt-spring-security-demo</repository>
-                     <tag>${project.version}</tag>
-                     <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
-                     <buildArgs>
-                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-                     </buildArgs>
-                  </configuration>
-               </plugin>
-            </plugins>
-         </build>
-      </profile>
-   </profiles>
 
 </project>

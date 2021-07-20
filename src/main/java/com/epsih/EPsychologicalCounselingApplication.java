@@ -7,9 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "E-Psychological Counseling API"))
-public class JwtDemoApplication {
+public class EPsychologicalCounselingApplication {
 
    public static void main(String[] args) {
-      SpringApplication.run(JwtDemoApplication.class, args);
+      SpringApplication.run(EPsychologicalCounselingApplication.class, args);
    }
+
 }
