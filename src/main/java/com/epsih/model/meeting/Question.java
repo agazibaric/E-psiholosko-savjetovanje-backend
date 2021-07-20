@@ -1,4 +1,4 @@
-package com.epsih.model;
+package com.epsih.model.meeting;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

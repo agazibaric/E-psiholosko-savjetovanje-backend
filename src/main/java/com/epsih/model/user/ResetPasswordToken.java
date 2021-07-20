@@ -1,5 +1,6 @@
-package com.epsih.model;
+package com.epsih.model.user;
 
+import com.epsih.model.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.epsih.model;
+package com.epsih.model.meeting;
 
 import java.time.LocalDateTime;
 
@@ -6,10 +6,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.epsih.enums.TerminType;
+import com.epsih.model.meeting.Meeting;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

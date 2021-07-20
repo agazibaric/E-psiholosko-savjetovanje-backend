@@ -1,11 +1,12 @@
-package com.epsih.model;
+package com.epsih.model.service;
 
 import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.epsih.model.user.Doctor;
+import com.epsih.model.meeting.Question;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
