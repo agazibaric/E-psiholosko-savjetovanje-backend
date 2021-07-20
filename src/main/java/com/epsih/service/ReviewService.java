@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.epsih.dto.ReviewDto;
 import com.epsih.exceptions.NotFoundException;
-import com.epsih.model.Doctor;
-import com.epsih.model.Patient;
-import com.epsih.model.Review;
+import com.epsih.model.user.Doctor;
+import com.epsih.model.user.Patient;
+import com.epsih.model.meeting.Review;
 import com.epsih.repository.ReviewRepository;
 
 import lombok.AllArgsConstructor;

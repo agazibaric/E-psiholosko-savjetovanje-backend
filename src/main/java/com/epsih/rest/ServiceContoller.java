@@ -5,7 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.epsih.constants.Endpoints;
-import com.epsih.model.Doctor;
+import com.epsih.model.user.Doctor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.epsih.model.BusinessService;
+import com.epsih.model.service.BusinessService;
 import com.epsih.service.BusinessServiceService;
 
 import lombok.AllArgsConstructor;

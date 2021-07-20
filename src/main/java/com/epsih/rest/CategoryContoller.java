@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.epsih.model.BusinessCategory;
+import com.epsih.model.service.BusinessCategory;
 import com.epsih.service.BusinessCategoryService;
 
 import lombok.AllArgsConstructor;

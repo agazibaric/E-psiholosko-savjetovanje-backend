@@ -8,7 +8,7 @@ import com.epsih.repository.MeetingRepository;
 import org.springframework.stereotype.Service;
 
 import com.epsih.exceptions.NotFoundException;
-import com.epsih.model.Termin;
+import com.epsih.model.meeting.Termin;
 import com.epsih.repository.TerminRepository;
 
 import lombok.AllArgsConstructor;

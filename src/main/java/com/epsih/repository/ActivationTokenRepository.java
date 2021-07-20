@@ -1,6 +1,6 @@
 package com.epsih.repository;
 
-import com.epsih.model.ActivationToken;
+import com.epsih.model.user.ActivationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

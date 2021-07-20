@@ -1,7 +1,6 @@
 package com.epsih.rest;
 
 import java.util.List;
-import java.util.Set;
 
 import com.epsih.constants.Endpoints;
 import org.springframework.http.HttpStatus;
@@ -9,16 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.epsih.model.Doctor;
-import com.epsih.model.Meeting;
-import com.epsih.model.Patient;
-import com.epsih.model.User;
+import com.epsih.model.user.User;
 import com.epsih.service.UserService;
 
 import lombok.AllArgsConstructor;

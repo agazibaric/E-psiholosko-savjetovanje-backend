@@ -1,10 +1,14 @@
-package com.epsih.model;
+package com.epsih.model.user;
 
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
 
+import com.epsih.model.meeting.Meeting;
+import com.epsih.model.meeting.Review;
+import com.epsih.model.service.BusinessService;
+import com.epsih.model.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;

@@ -1,6 +1,5 @@
-package com.epsih.model;
+package com.epsih.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.epsih.model.service.BusinessService;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

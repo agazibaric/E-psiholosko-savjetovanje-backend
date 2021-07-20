@@ -1,10 +1,13 @@
-package com.epsih.model;
+package com.epsih.model.meeting;
 
 import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.epsih.model.service.BusinessService;
+import com.epsih.model.user.Doctor;
+import com.epsih.model.user.Patient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

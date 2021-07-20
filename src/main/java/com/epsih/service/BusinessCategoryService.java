@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.epsih.exceptions.NotFoundException;
-import com.epsih.model.BusinessCategory;
+import com.epsih.model.service.BusinessCategory;
 import com.epsih.repository.BusinessCategoryRepository;
 
 import lombok.AllArgsConstructor;
