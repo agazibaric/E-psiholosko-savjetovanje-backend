@@ -87,6 +87,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
          .and()
          .authorizeRequests()
+
+         // Swagger
+         .antMatchers("/v3/**").permitAll()
+
+         // Auth endpoints
          .antMatchers("/api/authenticate").permitAll()
          .antMatchers("/api/register").permitAll()
          .antMatchers("/api/activate/*").permitAll()
