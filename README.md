@@ -12,8 +12,8 @@ Docker (version 20.10.6)
 
 ## Development
 
-`./package.script.sh`
+### Run 
+`./run.sh`
 
-`docker build --tag e-psych .`
-
-`docker run -p 8080:8080 e-psych:latest`
+### Run with Docker
+`./run-docker.sh`
